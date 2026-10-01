@@ -1,9 +1,0 @@
-{
-  "pid": 3283658,
-  "port": 10695,
-  "token": "4b4a5d35-5f31-4ffd-bd66-0329380d6e9f",
-  "startedAt": "2026-10-01T02:23:14.896Z",
-  "serverPath": "/home/wijnandb/.claude/skills/gstack/browse/src/server.ts",
-  "mode": "launched",
-  "configHash": "303a7eeccc03078b"
-}

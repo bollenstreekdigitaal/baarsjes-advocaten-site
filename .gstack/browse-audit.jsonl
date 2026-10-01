@@ -1,3 +1,0 @@
-{"ts":"2026-10-01T02:23:15.044Z","cmd":"goto","args":"http://localhost:8790/","origin":"http://localhost:8790/","durationMs":68,"status":"ok","hasCookies":false,"mode":"launched"}
-{"ts":"2026-10-01T02:23:17.180Z","cmd":"js","args":"performance.getEntriesByType(\"resource\").some(r=>/liveview\\.js/.test(r.name))","origin":"http://localhost:8790/","durationMs":12,"status":"ok","hasCookies":false,"mode":"launched"}
-{"ts":"2026-10-01T02:23:17.316Z","cmd":"console","args":"--errors","origin":"http://localhost:8790/","durationMs":0,"status":"ok","hasCookies":false,"mode":"launched"}
