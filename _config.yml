@@ -1,0 +1,3 @@
+# GitHub Pages (Jekyll): only site files live in this repo
+exclude:
+  - "*.md"
