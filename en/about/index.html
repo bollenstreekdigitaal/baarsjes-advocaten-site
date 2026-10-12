@@ -132,11 +132,16 @@
     <div class="spec-detail-inner">
 <div class="sd-head"><img class="avatar portrait" src="/img/clemens-hettema.jpg" alt="Mr. C.R. (Clemens) Hettema" width="96" height="96" loading="lazy">
         <h2>Mr. C.R. (Clemens) Hettema — Lawyer &amp; partner</h2></div>
-<div class="sd-body"><p>Clemens is a partner at Baarsjes Law Firm with a focus on personal and family law. He is currently following a family law specialisation course.</p>
-        <p>You can reach Clemens directly at <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>.</p>
+<div class="sd-body"><p>Mr. Hettema has been a lawyer in Amsterdam since 1997. His education: gymnasium (Dutch grammar school), law at the University of Amsterdam and the Dutch bar traineeship. He also takes part in continuing legal education every year, with a focus on personal and family law.</p>
+        <p>In 1993 he co-founded Hettema &amp; van Bambost Juristen, a firm for legal advice and debt collection. In 1997 he left to co-found Baarsjes Law Firm, where he is now a partner.</p>
+        <p>Mr. Hettema is a committed lawyer. He first tries to settle matters by mutual agreement. If that does not work, the case can go to court. He has extensive litigation experience across many areas of law.</p>
+        <p>He is listed in the Netherlands Bar's register of practice areas for personal and family law, tenancy law, criminal law and general practice. This requires him to earn training points every year. He speaks Dutch, English, German and French.</p>
+        <p>You can reach Mr. Hettema at <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. For urgent matters, call him directly on <span class="tel-m" data-r="3885223560" data-fmt="intl">his mobile number</span> (Mon–Fri).</p>
         <ul>
-            <li>Personal and family law (divorce, maintenance, custody, contact)</li>
-            <li>Currently following a family law specialisation course</li>
+            <li>Lawyer since 1997</li>
+            <li>Co-founder and partner of Baarsjes Law Firm</li>
+            <li>Registrations: personal and family law, tenancy law, criminal law, general practice</li>
+            <li>Languages: Dutch, English, German and French</li>
         </ul></div>
 </div>
 </div>
@@ -180,6 +185,19 @@
     const links = document.getElementById('navLinks');
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => links.classList.remove('open')));
+</script>
+<script>
+    // Clemens' mobile is not in the HTML as plain text, to keep it out of scraped call lists
+    document.querySelectorAll('.tel-m').forEach(el => {
+        const d = el.dataset.r.split('').reverse().join('');
+        const nl = el.dataset.fmt !== 'intl';
+        const shown = nl ? `${d.slice(0,2)} – ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`
+                         : `+31 6 ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`;
+        const a = document.createElement('a');
+        a.href = 'tel:' + (nl ? d : '+31' + d.slice(1));
+        a.textContent = shown;
+        el.replaceWith(a);
+    });
 </script>
 </body>
 </html>

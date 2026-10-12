@@ -982,12 +982,12 @@
                 <img class="avatar" src="/img/clemens-hettema.jpg" alt="Mr. C.R. (Clemens) Hettema" width="96" height="96" loading="lazy">
                 <h3>Mr. C.R. (Clemens) Hettema</h3>
                 <div class="role">Advocaat &amp; partner</div>
-                <p>Clemens Hettema is partner bij Advocatenkantoor de Baarsjes met focus op personen- en familierecht. Hij volgt momenteel een specialisatieopleiding familierecht.</p>
-                <p>U bereikt hem rechtstreeks via <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>.</p>
+                <p>Mr. Hettema is sinds 1997 advocaat in Amsterdam en mede-oprichter van ons kantoor. Hij probeert zaken eerst in overleg te regelen en heeft ruime proceservaring.</p>
+                <p>U bereikt hem via <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. Bij spoed: <span class="tel-m" data-r="3885223560">zijn mobiele nummer</span>.</p>
                 <div class="over-specs">
                     <span class="over-spec-tag">Personen- en familierecht</span>
-                    <span class="over-spec-tag">Echtscheiding</span>
-                    <span class="over-spec-tag">Mediation</span>
+                    <span class="over-spec-tag">Huurrecht</span>
+                    <span class="over-spec-tag">Strafrecht</span>
                 </div>
             </div>
         </div>
@@ -1193,5 +1193,18 @@
 </script>
 
 
+<script>
+    // Clemens' mobile is not in the HTML as plain text, to keep it out of scraped call lists
+    document.querySelectorAll('.tel-m').forEach(el => {
+        const d = el.dataset.r.split('').reverse().join('');
+        const nl = el.dataset.fmt !== 'intl';
+        const shown = nl ? `${d.slice(0,2)} – ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`
+                         : `+31 6 ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`;
+        const a = document.createElement('a');
+        a.href = 'tel:' + (nl ? d : '+31' + d.slice(1));
+        a.textContent = shown;
+        el.replaceWith(a);
+    });
+</script>
 </body>
 </html>

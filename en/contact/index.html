@@ -147,7 +147,8 @@
                 <div class="contact-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></div>
                 <div>
                     <strong>Direct to Clemens</strong>
-                    <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>
+                    <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a><br>
+                    <span>Urgent matters: <span class="tel-m" data-r="3885223560" data-fmt="intl">his mobile number</span></span>
                 </div>
             </div>
 
@@ -272,6 +273,19 @@
             errBox.hidden = false;
             btn.disabled = false;
         }
+    });
+</script>
+<script>
+    // Clemens' mobile is not in the HTML as plain text, to keep it out of scraped call lists
+    document.querySelectorAll('.tel-m').forEach(el => {
+        const d = el.dataset.r.split('').reverse().join('');
+        const nl = el.dataset.fmt !== 'intl';
+        const shown = nl ? `${d.slice(0,2)} – ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`
+                         : `+31 6 ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`;
+        const a = document.createElement('a');
+        a.href = 'tel:' + (nl ? d : '+31' + d.slice(1));
+        a.textContent = shown;
+        el.replaceWith(a);
     });
 </script>
 </body>
