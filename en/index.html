@@ -1057,8 +1057,8 @@
             </div>
             <div class="contact-form">
                 <h3>Send us a message</h3>
-                <form id="contactForm" action="https://forms.bollenstreekdigitaal.nl/api/v1/s/f_142d71a58f32" method="POST">
-                    <input type="hidden" name="_gotcha" value="">
+                <form id="contactForm" method="POST" data-endpoint="https://forms.bollenstreekdigitaal.nl/api/v1/s/f_142d71a58f32">
+                    <div style="position:absolute;left:-9999px" aria-hidden="true"><label for="website">Leave this field empty</label><input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>
                     <input type="hidden" name="_ts" value="">
                     <input type="hidden" name="_lang" value="en">
                     <div class="form-group">
@@ -1144,12 +1144,13 @@
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(form));
+        data._gotcha = data.website || ''; delete data.website;
         const btn = form.querySelector('.form-submit');
         const errBox = form.querySelector('.form-error');
         btn.disabled = true;
         errBox.hidden = true;
         try {
-            const res = await fetch(form.action, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+            const res = await fetch(form.dataset.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
             if (!res.ok) throw new Error('HTTP ' + res.status);
             form.style.display = 'none';
             success.classList.add('show');
