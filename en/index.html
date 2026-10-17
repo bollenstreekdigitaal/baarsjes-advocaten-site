@@ -962,7 +962,7 @@
                 <h3>Mr. C.R. (Clemens) Hettema</h3>
                 <div class="role">Lawyer &amp; partner</div>
                 <p>Mr. Hettema has been a lawyer in Amsterdam since 1997 and co-founded our firm. He first tries to settle matters by agreement and has extensive litigation experience.</p>
-                <p>You can reach him at <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. For urgent matters: <span class="tel-m" data-r="3885223560" data-fmt="intl">his mobile number</span>.</p>
+                <p>You can reach him at <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. For urgent matters: <button type="button" class="tel-m" data-p="Mzg4NTIyMzU2MA==" data-fmt="intl">show his mobile number</button>.</p>
                 <div class="over-specs">
                     <span class="over-spec-tag">Family law</span>
                     <span class="over-spec-tag">Tenancy law</span>
@@ -1163,18 +1163,21 @@
 </script>
 
 
+<style>.tel-m{background:none;border:0;padding:0;font:inherit;color:var(--navy,inherit);text-decoration:underline;text-underline-offset:.15em;cursor:pointer}</style>
 <script>
-    // Clemens' mobile is not in the HTML as plain text, to keep it out of scraped call lists
-    document.querySelectorAll('.tel-m').forEach(el => {
-        const d = el.dataset.r.split('').reverse().join('');
-        const nl = el.dataset.fmt !== 'intl';
+    // Clemens' mobile: encoded in the HTML and only shown on click, to keep it out of scraped call lists.
+    // data-p = base64 of the reversed digits (see ~/areas/perceptum/clients/CLAUDE.md → "Phone numbers").
+    document.querySelectorAll('button.tel-m').forEach(btn => btn.addEventListener('click', () => {
+        const d = atob(btn.dataset.p).split('').reverse().join('');
+        const nl = btn.dataset.fmt !== 'intl';
         const shown = nl ? `${d.slice(0,2)} – ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`
                          : `+31 6 ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`;
         const a = document.createElement('a');
         a.href = 'tel:' + (nl ? d : '+31' + d.slice(1));
         a.textContent = shown;
-        el.replaceWith(a);
-    });
+        btn.replaceWith(a);
+        a.focus();
+    }));
 </script>
 </body>
 </html>

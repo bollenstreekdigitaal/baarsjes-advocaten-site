@@ -150,7 +150,7 @@
         <p>In 1993 richtte hij mede Hettema &amp; van Bambost Juristen op, een bureau voor juridisch advies en incasso. In 1997 vertrok hij daar en richtte hij mede Advocatenkantoor de Baarsjes op, waar hij nu partner is.</p>
         <p>Mr. Hettema is een betrokken advocaat. Hij probeert zaken eerst in onderling overleg te regelen. Lukt dat niet, dan kan de zaak naar de rechter. Hij heeft ruime proceservaring op allerlei rechtsgebieden.</p>
         <p>Hij is in het NOvA-rechtsgebiedenregister ingeschreven voor personen- en familierecht, huurrecht, strafrecht en algemene praktijk. Daarvoor haalt hij elk jaar opleidingspunten. Hij spreekt Nederlands, Engels, Duits en Frans.</p>
-        <p>U bereikt mr. Hettema via <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. Bij spoed belt u hem rechtstreeks op <span class="tel-m" data-r="3885223560">zijn mobiele nummer</span> (ma–vr).</p>
+        <p>U bereikt mr. Hettema via <a href="mailto:clemens@advocatenkantoordebaarsjes.com">clemens@advocatenkantoordebaarsjes.com</a>. Bij spoed belt u hem rechtstreeks op <button type="button" class="tel-m" data-p="Mzg4NTIyMzU2MA==">toon zijn mobiele nummer</button> (ma–vr).</p>
         <ul>
             <li>Advocaat sinds 1997</li>
             <li>Mede-oprichter en partner van Advocatenkantoor de Baarsjes</li>
@@ -200,18 +200,21 @@
     toggle.addEventListener('click', () => links.classList.toggle('open'));
     links.querySelectorAll('a').forEach(link => link.addEventListener('click', () => links.classList.remove('open')));
 </script>
+<style>.tel-m{background:none;border:0;padding:0;font:inherit;color:var(--navy,inherit);text-decoration:underline;text-underline-offset:.15em;cursor:pointer}</style>
 <script>
-    // Clemens' mobile is not in the HTML as plain text, to keep it out of scraped call lists
-    document.querySelectorAll('.tel-m').forEach(el => {
-        const d = el.dataset.r.split('').reverse().join('');
-        const nl = el.dataset.fmt !== 'intl';
+    // Clemens' mobile: encoded in the HTML and only shown on click, to keep it out of scraped call lists.
+    // data-p = base64 of the reversed digits (see ~/areas/perceptum/clients/CLAUDE.md → "Phone numbers").
+    document.querySelectorAll('button.tel-m').forEach(btn => btn.addEventListener('click', () => {
+        const d = atob(btn.dataset.p).split('').reverse().join('');
+        const nl = btn.dataset.fmt !== 'intl';
         const shown = nl ? `${d.slice(0,2)} – ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`
                          : `+31 6 ${d.slice(2,4)} ${d.slice(4,6)} ${d.slice(6,8)} ${d.slice(8)}`;
         const a = document.createElement('a');
         a.href = 'tel:' + (nl ? d : '+31' + d.slice(1));
         a.textContent = shown;
-        el.replaceWith(a);
-    });
+        btn.replaceWith(a);
+        a.focus();
+    }));
 </script>
 </body>
 </html>
